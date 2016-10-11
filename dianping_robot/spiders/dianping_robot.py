@@ -2,20 +2,63 @@
 
 import scrapy
 import re
+import logging
+
+from scrapy.utils.log import configure_logging
 from dianping_robot.items import DianpingRobotItem
 from scrapy.spidermiddlewares.httperror import HttpError
 from twisted.internet.error import DNSLookupError
 from twisted.internet.error import TimeoutError, TCPTimedOutError
 
+
 class DianpingSpider(scrapy.Spider):
     name = "dianping"
     start_urls = [
-        # 'http://www.dianping.com/shop/2743444'
-        # 'http://www.dianping.com/beijing'
-        'http://www.dianping.com/search/category/2/10/g110'
+        'http://www.dianping.com/search/category/2/10/g101',
+        'http://www.dianping.com/search/category/2/10/g102',
+        'http://www.dianping.com/search/category/2/10/g103',
+        'http://www.dianping.com/search/category/2/10/g104',
+        'http://www.dianping.com/search/category/2/10/g105',
+        'http://www.dianping.com/search/category/2/10/g106',
+        'http://www.dianping.com/search/category/2/10/g108',
+        'http://www.dianping.com/search/category/2/10/g109',
+        'http://www.dianping.com/search/category/2/10/g110',
+        'http://www.dianping.com/search/category/2/10/g111',
+        'http://www.dianping.com/search/category/2/10/g112',
+        'http://www.dianping.com/search/category/2/10/g113',
+        'http://www.dianping.com/search/category/2/10/g114',
+        'http://www.dianping.com/search/category/2/10/g115',
+        'http://www.dianping.com/search/category/2/10/g116',
+        'http://www.dianping.com/search/category/2/10/g117',
+        'http://www.dianping.com/search/category/2/10/g118',
+        'http://www.dianping.com/search/category/2/10/g132',
+        'http://www.dianping.com/search/category/2/10/g246',
+        'http://www.dianping.com/search/category/2/10/g248',
+        'http://www.dianping.com/search/category/2/10/g251',
+        'http://www.dianping.com/search/category/2/10/g311',
+        'http://www.dianping.com/search/category/2/10/g508',
+        'http://www.dianping.com/search/category/2/10/g1783',
+        'http://www.dianping.com/search/category/2/10/g3243',
+        'http://www.dianping.com/search/category/2/10/g26481',
+        'http://www.dianping.com/search/category/2/10/g26483'
     ]
     # url_seen = set()
     # start_url = 'http://www.dianping.com/search/category/2/10/g110'
+
+    def __init__(self, name=None, **kwargs):
+        # configure_logging is automatically called when using Scrapy commands
+        configure_logging(install_root_handler=False)
+        logging.basicConfig(
+            filename='log_info.txt',
+            format='%(levelname)s: %(message)s',
+            level=logging.INFO
+        )
+        logging.basicConfig(
+            filename='log_warning.txt',
+            format='%(levelname)s: %(message)s',
+            level=logging.WARNING
+        )
+        super(DianpingSpider, self).__init__(name, **kwargs)
 
     def start_requests(self):
         for u in self.start_urls:
@@ -42,6 +85,11 @@ class DianpingSpider(scrapy.Spider):
         elif failure.check(TimeoutError, TCPTimedOutError):
             request = failure.request
             self.logger.error('TimeoutError on %s', request.url)
+
+    # def parse_indexs(self, response):
+    #     index_pages = response.xpath('//div[contains(@id,"main-nav")]//div[contains(@class,"secondary-category")]//a/@href').re(r'.*\d+')
+    #     for index_page in index_pages:
+    #         pass
 
     def parse_index(self, response):
         # debug cmd: scrapy shell "http://www.dianping.com/beijing"

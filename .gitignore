@@ -1,6 +1,7 @@
 # my custom
 items.json.bak
 items.json
+log/dianping.log
 
 # Byte-compiled / optimized / DLL files
 dianping_robot/__pycache__/
