@@ -69,7 +69,8 @@ DOWNLOADER_MIDDLEWARES = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'dianping_robot.pipelines.DuplicatesPipeline': 300,
-   'dianping_robot.pipelines.JsonWriterPipeline': 800,
+   # 'dianping_robot.pipelines.JsonWriterPipeline': 800,
+   'dianping_robot.pipelines.DBPipeline': 800,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -94,16 +95,16 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # Log configuration
-# LOG_FILE = 'log/dianping.log'
+LOG_FILE = 'log/dianping.log'
 
 # You can stop the spider safely at any time in cmd
 # JOBDIR = 'dianping.persist'
 
 # BFO
-DEPTH_LIMIT = 5
-DEPTH_PRIORITY = 1
-SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'
-SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
+# DEPTH_LIMIT = 5
+# DEPTH_PRIORITY = 1
+# SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'
+# SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
 
 # My custom
 USER_AGENTS = [

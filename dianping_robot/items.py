@@ -9,7 +9,7 @@ import scrapy
 
 
 class DianpingRobotItem(scrapy.Item):
-    # define the fields for your item here like:
+    # basic
     type = scrapy.Field()
     name = scrapy.Field()
     address = scrapy.Field()
@@ -22,6 +22,10 @@ class DianpingRobotItem(scrapy.Item):
     score_flavor = scrapy.Field()
     score_environment = scrapy.Field()
     score_service = scrapy.Field()
+
+    # location
+    lng = scrapy.Field()
+    lat = scrapy.Field()
 
     # revelent
     # shop_branchs = scrapy.Field()

@@ -25,6 +25,7 @@ class ProxyMiddleware(UserAgentMiddleware):
     # the default user_agent_list composes chrome,I E,firefox,Mozilla,opera,netscape
     # for more user agent strings,you can find it in http://www.useragentstring.com/pages/useragentstring.php
 
+
 class DuplicateFilterMiddleware(object):
 
     def __init__(self):
